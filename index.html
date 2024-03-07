@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>file Downloader</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #4285F4;
+        }
+        .wrapper{
+            width: 500px;
+            background: #fff;
+            border-radius: 7px;
+            padding: 20px 25px 15px;
+
+        }
+        header h1{
+            font-size: 27px;
+            font-weight: 500;
+        }
+        header p{
+               font-size: 18px;
+               margin-top: 5px;
+
+        }
+        form{
+            margin: 20px 0 27px;
+        }
+        form input{
+            width: 100%;
+            height: 60px;
+            outline: none;
+            font-size: 19px;
+            padding:  0 17px;
+            border-radius: 5px;
+            border: 1px solid #b3b2b2;
+        }
+        form button{
+            opacity: 0.7;
+            width: 100%;
+            border: none;
+            outline: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 15px 0;
+            font-size: 17px;
+            margin-top: 20px;
+            border-radius: 5px;
+            background: #4285F4;
+            pointer-events: none;
+        }
+        form input:valid ~ button{
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>File Downloader</h1>
+            <p>Paste Url or image,video,or pdf download.</p>
+        </header>
+        <form action="#">
+            
+        <input type="url" placeholder="Paste file url" required>
+        <button>Download file</button>
+    </form>
+</div>
+
+
+<script>
+
+
+    const fileInput = document.querySelector("input")
+    downloadBtn = document.querySelector("button");
+
+
+    downloadBtn.addEventListener("click",e => {
+        e.preventDefault();//preventing form from submitting
+        downloadBtn.innerText = "Downloading file.....";
+        fetchFile(fileInput.value);
+    });
+
+    function fetchFile(url){
+        //fetching file & returning response as blob
+        fetch(url).then(res => res.blob()).then(file =>{
+            //URL.createObjectURL creates a url of passed object
+            let tempUrl = URL.createObjectURL(file);
+            let aTag = document.createElement("a");
+            aTag.href = tempUrl;//passing tempurl as href value of <a> tag //passing filename as download value of <a> tag
+            aTag.download = url.replace(/^.*[\\\/]/,'');
+           // console.log(tempUrl)
+           document.body.appendChild(aTag);//adding <a> tag inside body
+            aTag.click();//checking <a> tag so the files download
+                aTag.remove();//removing <a> tag once file downloaded
+                    URL.revokeObjectURL(tempUrl);//removing temurl from the documents
+        downloadBtn.innerText = "Downloading file";
+
+        }).catch(() =>{
+        downloadBtn.innerText = "Downloading file";
+        alert('Failed to downloadfiles');
+
+        });
+    }
+</script>
+
+</body>
+</html>
