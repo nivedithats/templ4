@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <form name = “quiz”>
+<h1> Quiz </h1>
+
+ <h3>Please make your choice:</h3>
+<br>
+
+<input type="radio" name="question1" value="a1">Q1<br>
+<input type="radio" name="question1" value="a2">Q2<br>
+<input type="radio" name="question1" value="a3">Q3<br>
+
+<input type="button" value="Submit" onclick="selectionOne()"><br><br>
+
+<input type="radio" name="question2" value="a1">Q1<br>
+<input type="radio" name="question2" value="a2">Q2<br>
+<input type="radio" name="question2" value="a3">Q3<br>
+<input type="button" value="Submit" onclick="selectionTwo()"><br><br>
+
+<input type="radio" name="question3" value="a1">Q1<br>
+<input type="radio" name="question3" value="a2">Q2<br>
+<input type="radio" name="question3" value="a3">Q3<br>
+<input type="button" value="Submit" onclick="selectionThree()"><br><br>
+
+</form>
+<script>
+    //Radio Button Selections
+function selectionOne(){
+var chosen = "";
+if (document.quiz.question[0].checked){
+chosen = document.quiz.question1[0].value;
+}
+else if (document.quiz.question1[1].checked){
+chosen = document.quiz.question1[1].value;
+}
+else{
+chosen = document.quiz.question1[2].value;
+}
+}
+
+function selectionTwo(){
+var chosen = "";
+if (document.quiz.question2[0].checked){
+chosen = document.quiz.question2[0].value;
+}
+else if (document.quiz.question2[1].checked){
+chosen = document.quiz.question2[1].value;
+}
+else{
+chosen = document.quiz.question2[2].value;
+}
+}
+
+function selectionThree(){
+var chosen = "";
+if (document.quiz.question3[0].checked){
+chosen = document.quiz.question3[0].value;
+}
+else if (document.quiz.question3[1].checked){
+chosen = document.quiz.question3[1].value;
+}
+else{
+chosen = document.quiz.question3[2].value;
+}
+}
+
+//Create Objects with Questions and Answers In
+var Q1={
+question: "What is one of the keyboard shortcuts for copy?",
+a1: "Ctrl + C",
+a2: "Ctrl + V",
+a3: "Shift + C",
+answer: 1,
+};
+
+var Q2={
+question: "What element of the browser enables you to get additional features?",
+a1: "Browser Addons",
+a2: "More Features",
+a3: "Browser Extensions",
+answer: 3,
+};
+
+var Q3={
+question: "What is one of the keyboard shortcuts for paste?",
+
+a1: "Ctrl + P",
+a2: "Ctrl + V",
+a3: "Shift + V",
+answer: 2,
+};
+
+var Q4={
+question: "What’s the quickest way to find specific text on this page?",
+a1: "Look for it",
+a2: "Ctrl + F",
+a3: "Ctrl + L",
+answer: 2,
+};
+
+var Q5={
+question: "What computer component is featured on the front page?",
+a1: "Motherboard",
+a2: "Graphics Card",
+a3: "Hard Drive",
+answer: 1,
+};
+
+//Create array to store Objects (Questions and Answers)
+var quiz = new Array(6);
+quiz[0] = Q1;
+quiz[1] = Q2;
+quiz[2] = Q3;
+quiz[3] = Q4;
+quiz[4] = Q5;
+
+//Generate Random question
+var question1 = quiz[Math.floor(Math.random() * quiz.length)];
+var question2 = quiz[Math.floor(Math.random() * quiz.length)];
+var question3 = quiz[Math.floor(Math.random() * quiz.length)];
+
+</script>
+</body>
+</html>
